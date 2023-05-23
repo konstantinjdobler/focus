@@ -1,0 +1,9 @@
+torch
+transformers
+datasets
+entmax
+fasttext
+requests
+numpy 
+tqdm
+loguru
