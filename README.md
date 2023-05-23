@@ -1,16 +1,23 @@
-from transformers import (
-    AutoModelForMaskedLM,
-    AutoTokenizer,
-    PreTrainedModel,
-    PreTrainedTokenizer,
-)
+# FOCUS
 
+Code for FOCUS: Effective Embedding Initialization for Specializing Multilingual Models on a Single Language
+
+Preprint on arXiv: Coming soon.
+
+## Usage
+
+You can clone the repository or simply copy the `focus` folder. The necessary dependencies are listed in `requirements.txt` (`pip install -r requirements.txt`).
+
+The following example shows how to use FOCUS to specialize `xlm-roberta-base` on German with a custom, language-specific tokenizer. The code is also available in [`focus_example.py`](focus_example.py).
+
+```python
+from transformers import AutoModelForMaskedLM, AutoTokenizer
 from focus import FOCUS
 
 source_tokenizer = AutoTokenizer.from_pretrained("xlm-roberta-base")
-source_model: PreTrainedModel = AutoModelForMaskedLM.from_pretrained("xlm-roberta-base")
+source_model = AutoModelForMaskedLM.from_pretrained("xlm-roberta-base")
 
-target_tokenizer: PreTrainedTokenizer = AutoTokenizer.from_pretrained(
+target_tokenizer = AutoTokenizer.from_pretrained(
     "./tokenizers/de/xlm-roberta-base-50k"
 )
 
@@ -36,3 +43,19 @@ source_model.get_input_embeddings().weight.data = target_embeddings
 
 # Continue training the model on the target language with `target_tokenizer`.
 # ...
+```
+
+## Citation
+
+You can cite FOCUS like this:
+
+```tex
+@misc{dobler-demelo-2023-focus,
+    title={Effective Embedding Initialization for Specializing Multilingual Models on a Single Language},
+    author={Konstantin Dobler and Gerard de Melo},
+    year={2023},
+    % arXiv coming soon
+}
+```
+
+If you use the "WECHSEL-style" word-to-subword mapping, please consider also citing their [original work](https://github.com/CPJKU/wechsel).
