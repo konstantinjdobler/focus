@@ -1,8 +1,8 @@
 # FOCUS
 
-Code for FOCUS: Effective Embedding Initialization for Specializing Multilingual Models on a Single Language
+Code for FOCUS: Effective Embedding Initialization for Specializing Pretrained Multilingual Models on a Single Language
 
-Preprint on arXiv: Coming soon.
+Preprint on arXiv: https://arxiv.org/abs/2305.14481.
 
 ## Usage
 
@@ -49,12 +49,14 @@ source_model.get_input_embeddings().weight.data = target_embeddings
 
 You can cite FOCUS like this:
 
-```tex
+```bibtex
 @misc{dobler-demelo-2023-focus,
-    title={Effective Embedding Initialization for Specializing Multilingual Models on a Single Language},
+    title={FOCUS: Effective Embedding Initialization for Specializing Pretrained Multilingual Models on a Single Language},
     author={Konstantin Dobler and Gerard de Melo},
     year={2023},
-    % arXiv coming soon
+    eprint={2305.14481},
+    archivePrefix={arXiv},
+    primaryClass={cs.CL}
 }
 ```
 
