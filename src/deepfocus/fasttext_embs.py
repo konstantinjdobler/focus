@@ -41,12 +41,10 @@ def train_fasttext(
     """
     processes = processes or multiprocessing.cpu_count()
     target_tokenizer_hash = Hasher().hash(target_tokenizer)
-    # data_file_name = Path(text_path).stem
     data_file_suffix = Path(text_path).suffix
 
     text_path_sanitized = text_path.rstrip("/\\").replace("/", "_").replace("\\", "_")
 
-    # print(target_tokenizer_hash, data_file_name, data_file_suffix)
     cache_file = CACHE_DIR / "data" / f"{text_path_sanitized}_tokenized_{target_tokenizer_hash}{data_file_suffix}"
 
     if cache_file.exists():

@@ -147,7 +147,9 @@ def FOCUS(
     ###########################################################
     if auxiliary_embedding_mode == "fasttext-tokenlevel":
         if not target_training_data_path and not fasttext_model_path:
-            raise ValueError("You need to provide a path to training data for fasttext-tokenlevel auxiliary embeddings.")
+            raise ValueError(
+                "You need to provide a path to training data or pretrained fasttext model for fasttext-tokenlevel auxiliary embeddings."
+            )
         fasttext_model = load_target_token_embedding(
             target_tokenizer=extend_tokenizer or target_tokenizer,
             target_training_data_path=target_training_data_path,
@@ -250,8 +252,8 @@ def FOCUS(
     gen = torch.Generator(device=device).manual_seed(seed)
     for ood_new_token in random_init_new_tokens:
         target_embeddings[ood_new_token.target.id] = torch.normal(emb_mean, emb_std, generator=gen)
-    logger.debug(
-        f"Initialized {len(random_init_new_tokens)} new tokens from normal distribution with mean and std from source token embeddings because they did not have auxiliary embeddings (this is okay)."
+    logger.info(
+        f"Initialized {len(random_init_new_tokens)} new tokens from N(source_mean, source_std) because they do not have auxiliary embeddings (this is okay if it's not too many)."
     )
 
     #######################################################
