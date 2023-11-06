@@ -1,0 +1,41 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  test:
+    uses: ./.github/workflows/test.yml 
+  pypi:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Pre-install setuptools_scm 
+        run: python3 -m pip install --upgrade setuptools_scm
+      - name: Set a PyPI compatible setuptools_scm pretend version
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+        # Required for continuously deploying to Test PyPI when we have commits not part of a tag/release
+        # See https://github.com/pypa/setuptools_scm/issues/478
+        # Snippet from: https://github.com/abhilash1in/paperplane/blob/1dfda182dc8a70fe08fa2284ea63b434246c394b/.github/workflows/CI.yml#L72-L84
+        run: |
+          from setuptools_scm import get_version
+          real_version = get_version()
+          pretend_version = get_version(local_scheme='no-local-version', version_scheme='post-release')
+          if pretend_version != real_version:
+            print(f'Setting SETUPTOOLS_SCM_PRETEND_VERSION to {pretend_version} instead of using version {real_version}')
+            print(f'::set-env name=SETUPTOOLS_SCM_PRETEND_VERSION::{pretend_version}')
+          else:
+            print(f'Version {real_version} is compatible with PyPI. No action needed.')
+        shell: python
+      - name: Build
+        run: python3 -m pip install --upgrade build && python3 -m build
+      - name: Publish distribution to test.PyPI.org
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_TEST_TOKEN }}
+          repository-url: https://test.pypi.org/legacy/

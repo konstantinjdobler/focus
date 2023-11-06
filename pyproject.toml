@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=45", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+markers = ["reproducibility", "main", "extend"]
+
+[tool.black]
+line-length = 128
+target-version = ['py310']
+
+[tool.ruff]
+line-length = 128
+target-version = 'py310'
+ignore-init-module-imports = true
+ignore = ['E203', 'E501']
+# E203: See https://github.com/PyCQA/pycodestyle/issues/373
+# E501: Disable line length error
