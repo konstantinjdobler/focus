@@ -5,7 +5,7 @@ from transformers import (
     PreTrainedTokenizer,
 )
 
-from focus import FOCUS
+from deepfocus import FOCUS
 
 source_tokenizer = AutoTokenizer.from_pretrained("xlm-roberta-base")
 source_model: PreTrainedModel = AutoModelForMaskedLM.from_pretrained("xlm-roberta-base")
