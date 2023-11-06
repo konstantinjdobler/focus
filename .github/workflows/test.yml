@@ -6,10 +6,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        test_kind: ["reproducibility", "main", "extend"]
-      fail-fast: false
     steps:
       - uses: actions/checkout@v3
       - name: Setup Python 3.10
@@ -28,5 +24,5 @@ jobs:
         with:
           key: deepfocus
           path: ~/.cache/deepfocus
-      - name: Run ${{ matrix.test_kind }} tests
-        run: python -m pytest -m ${{ matrix.test_kind }} tests/
+      - name: Run tests
+        run: python -m pytest tests/
