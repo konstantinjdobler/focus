@@ -26,6 +26,8 @@ target_embeddings = FOCUS(
     source_tokenizer=source_tokenizer,
     target_tokenizer=target_tokenizer,
     target_training_data_path="/path/to/data.txt"
+    # fasttext_model_path="/path/to/fasttext.bin", # or directly provide path to token-level fasttext model 
+    
     # In the paper, we use `target_training_data_path` but we also implement using
     # WECHSEL's word-to-subword mapping if the language has pretrained fasttext word embeddings available online
     # To use, supply a two-letter `language_identifier` (e.g. "de" for German) instead of `target_training_data_path`

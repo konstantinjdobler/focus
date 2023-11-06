@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+title: "FOCUS: Effective Embedding Initialization for Monolingual Specialization of Multilingual Models"
+message: "If you use this software, please cite the paper from preferred-citation."
+type: software
+url: "https://github.com/konstantinjdobler/focus"
+authors:
+  - given-names: Konstantin
+    family-names: Dobler
+  - given-names: Gerard
+    family-names: Melo
+    name-particle: de
+preferred-citation:
+  abbreviation: dobler-demelo-2023-focus
+  type: conference-paper
+  authors:
+    - given-names: Konstantin
+      family-names: Dobler
+    - given-names: Gerard
+      family-names: Melo
+      name-particle: de
+  title: "FOCUS: Effective Embedding Initialization for Monolingual Specialization of Multilingual Models"
+  year: 2023
+  publisher: "Empirical Methods in Natural Language Processing"
+  url: "https://arxiv.org/abs/2305.14481"

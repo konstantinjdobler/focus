@@ -1,0 +1,32 @@
+name: Run tests
+on:
+  pull_request:
+    branches: [main]
+  workflow_call:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        test_kind: ["reproducibility", "main", "extend"]
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+          cache: "pip"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install wheel
+          pip install -r requirements.txt
+          pip install pytest pytest_mock
+      - name: Restore deepfocus cache (e.g. fastText models)
+        uses: actions/cache@v3
+        with:
+          key: deepfocus
+          path: ~/.cache/deepfocus
+      - name: Run ${{ matrix.test_kind }} tests
+        run: python -m pytest -m ${{ matrix.test_kind }} tests/

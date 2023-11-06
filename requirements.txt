@@ -3,7 +3,10 @@ transformers
 datasets
 entmax
 fasttext
+fastdist
+numba
+scipy
 requests
 numpy 
 tqdm
-loguru
+print-on-steroids
