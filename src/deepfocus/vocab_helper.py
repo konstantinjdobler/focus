@@ -2,6 +2,7 @@ import string
 from dataclasses import dataclass
 
 import numpy as np
+import regex
 from torch import Tensor
 from tqdm import tqdm
 from transformers import PreTrainedTokenizer
@@ -59,6 +60,11 @@ def get_canonicalize_token_fn(input_tokenizer: PreTrainedTokenizer):
         """For XLM-R tokenizer (sentencepiece-style)"""
         decoded_token = tokenizer.decode(token_id)
         token = tokenizer.convert_ids_to_tokens(token_id)
+        
+        # For sentencepiece ByteFallback tokens used in Llama, Mistral et al.
+        if regex.match(r"<0x[0-9,A-F]{2}>", token):
+            return token, False
+
         is_beginning_of_word = token.startswith(XLMR_WHITESPACE)
         if is_beginning_of_word:
             return XLMR_WHITESPACE + decoded_token.lstrip(), True
