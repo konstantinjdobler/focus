@@ -2,7 +2,7 @@ torch
 transformers
 datasets
 entmax
-fasttext
+fasttext-wheel
 fastdist
 numba
 scipy
