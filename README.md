@@ -71,13 +71,21 @@ In our experiments, full vocabulary replacement coupled with FOCUS outperformed 
 You can cite FOCUS like this:
 
 ```bibtex
-@misc{dobler-demelo-2023-focus,
-    title={FOCUS: Effective Embedding Initialization for Monolingual Specialization of Multilingual Models},
-    author={Konstantin Dobler and Gerard de Melo},
-    year={2023},
-    eprint={2305.14481},
-    archivePrefix={arXiv},
-    primaryClass={cs.CL}
+@inproceedings{dobler-de-melo-2023-focus,
+    title = "{FOCUS}: Effective Embedding Initialization for Monolingual Specialization of Multilingual Models",
+    author = "Dobler, Konstantin  and
+      de Melo, Gerard",
+    editor = "Bouamor, Houda  and
+      Pino, Juan  and
+      Bali, Kalika",
+    booktitle = "Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing",
+    month = dec,
+    year = "2023",
+    address = "Singapore",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2023.emnlp-main.829",
+    doi = "10.18653/v1/2023.emnlp-main.829",
+    pages = "13440--13454",
 }
 ```
 
