@@ -50,6 +50,17 @@ target_embeddings = FOCUS(
 source_model.resize_token_embeddings(len(target_tokenizer))
 source_model.get_input_embeddings().weight.data = target_embeddings
 
+# if the model has separate output embeddings, apply FOCUS separately
+if not model.config.tie_word_embeddings:
+    target_output_embeddings = FOCUS(
+        source_embeddings=source_model.get_output_embeddings().weight,
+        source_tokenizer=source_tokenizer,
+        target_tokenizer=target_tokenizer,
+        target_training_data_path="/path/to/data.txt"
+        # same argument options as above, fasttext models are cached!
+    )
+    model.get_output_embeddings().weight.data = target_output_embeddings
+
 # Continue training the model on the target language with `target_tokenizer`.
 # ...
 ```
