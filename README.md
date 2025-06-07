@@ -37,7 +37,7 @@ target_embeddings = FOCUS(
     source_embeddings=source_model.get_input_embeddings().weight,
     source_tokenizer=source_tokenizer,
     target_tokenizer=target_tokenizer,
-    target_training_data_path="/path/to/data.txt"
+    target_training_data_path="/path/to/data.jsonl" # data should be `.jsonl` where each line is a sample like {"text": "Lorem ipsum..."}
     # fasttext_model_path="/path/to/fasttext.bin", # or directly provide path to token-level fasttext model 
 
     # In the paper, we use `target_training_data_path` but we also implement using
@@ -56,7 +56,7 @@ if not model.config.tie_word_embeddings:
         source_embeddings=source_model.get_output_embeddings().weight,
         source_tokenizer=source_tokenizer,
         target_tokenizer=target_tokenizer,
-        target_training_data_path="/path/to/data.txt"
+        target_training_data_path="/path/to/data.jsonl"
         # same argument options as above, fasttext models are cached!
     )
     model.get_output_embeddings().weight.data = target_output_embeddings
